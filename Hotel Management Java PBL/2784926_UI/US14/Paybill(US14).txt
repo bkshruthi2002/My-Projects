@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .menu-container {
+            background-color: #444;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .payment-box {
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>Payment Page</div>
+        <div id="welcomeMessage">Welcome, <span id="userId">User</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="#" onclick="navigateTo('Homepage(US4).html')">Home</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Billing Summary</h2>
+        <div class="payment-box">
+            <p><strong>Bill Amount:</strong> $250</p>
+            <label for="paymentMode">Mode of Payment:</label>
+            <select id="paymentMode">
+                <option value="Debit">Debit</option>
+                <option value="Credit">Credit</option>
+            </select>
+            <button class="btn" onclick="proceedToPayment()">Pay Now</button>
+            <button class="btn" onclick="navigateTo('Homepage(US4).html')">Back to Home</button>
+        </div>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+        function proceedToPayment() {
+            window.location.href = "CardPayment.html";
+        }
+    </script>
+</body>
+</html>

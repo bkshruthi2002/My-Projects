@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .menu-container {
+            background-color: #444;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .success-message {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>Reservation Page</div>
+        <div id="welcomeMessage">Welcome, <span id="userId">User</span></div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="#" onclick="navigateTo('Homepage(US4).html')">Home</a></li>
+            <li><a href="#" onclick="navigateTo('Reservation(US6).html')">Reservation</a></li>
+            <li><a href="#" onclick="navigateTo('Billing(US8).html')">Billing Page</a></li>
+            <li><a href="#" onclick="navigateTo('History(US10).html')">History</a></li>
+            <li><a href="#" onclick="navigateTo('Bookings(US15).html')">Bookings</a></li>
+            <li><a href="#" onclick="navigateTo('Support(US16).html')">Contact Support</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Reservation Form</h2>
+        <form onsubmit="return submitReservation()">
+            <label>Check-in Date:</label>
+            <input type="date" id="checkin" required>
+            
+            <label>Check-out Date:</label>
+            <input type="date" id="checkout" required>
+            
+            <label>Room Preference:</label>
+            <select id="roomPreference">
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Suite">Suite</option>
+            </select>
+            
+            <label>Name:</label>
+            <input type="text" id="name" required>
+            
+            <label>Contact Number:</label>
+            <input type="number" id="contact" required>
+            
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <p class="success-message" id="successMessage"></p>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+        function submitReservation() {
+            let name = document.getElementById("name").value;
+            let bookingId = "BOOK" + Math.floor(1000 + Math.random() * 9000);
+            
+            document.getElementById("successMessage").innerText = "Reservation Successful. Booking ID: " + bookingId;
+            document.getElementById("successMessage").style.display = "block";
+            return false; // Prevent actual form submission
+        }
+        
+        // Simulating a logged-in user ID
+        document.getElementById("userId").innerText = "CUST74240";
+    </script>
+</body>
+</html>

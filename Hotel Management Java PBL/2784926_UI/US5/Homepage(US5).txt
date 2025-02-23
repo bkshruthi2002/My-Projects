@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .menu-container {
+            background-color: #444;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>Admin Home Page</div>
+        <div id="welcomeMessage">Welcome, <span id="userId">Admin</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="#" onclick="navigateTo('Homepage(US4).html')">Home</a></li>
+            <li><a href="#" onclick="navigateTo('Reservation(US6).html')">Reservation</a></li>
+            <li><a href="#" onclick="navigateTo('Billing(US8).html')">Billing Page</a></li>
+            <li><a href="#" onclick="navigateTo('History(US10).html')">History</a></li>
+            <li><a href="#" onclick="navigateTo('Roomstatus(US12).html')">Room Status</a></li>
+            <li><a href="#" onclick="navigateTo('Bookings(US15).html')">Bookings</a></li>
+            <li><a href="#" onclick="navigateTo('Support(US16).html')">Contact Support/Feedback</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Welcome to Admin Dashboard</h2>
+        <p>Select an option from the menu above to proceed.</p>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+    </script>
+</body>
+</html>

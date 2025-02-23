@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 10px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="loginForm">
+        <h2>Login</h2>
+        <form onsubmit="return loginUser()">
+            <label>User ID:</label>
+            <input type="text" id="userID" minlength="5" maxlength="20" required>
+            
+            <label>Password:</label>
+            <input type="password" id="password" maxlength="30" required>
+            
+            <p class="error-message" id="errorMessage"></p>
+            
+            <button type="submit" class="btn" style="background-color: blue; color: white;">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function loginUser() {
+            let userID = document.getElementById("userID").value;
+            let password = document.getElementById("password").value;
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,30}$/;
+            let errorMessage = document.getElementById("errorMessage");
+            
+            if (userID.length < 5 || userID.length > 20) {
+                errorMessage.innerText = "User ID must be between 5 and 20 characters.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+            
+            if (!passwordRegex.test(password)) {
+                errorMessage.innerText = "Password must contain at least one uppercase letter, one lowercase letter, and one special character.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+            
+            errorMessage.style.display = "none";
+            window.location.href = "Homepage(US4).html";
+            return false;
+        }
+    </script>
+</body>
+</html>

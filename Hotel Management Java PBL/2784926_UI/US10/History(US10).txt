@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .menu-container {
+            background-color: #444;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>History Page</div>
+        <div id="welcomeMessage">Welcome, <span id="userId">User</span></div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="#" onclick="navigateTo('Homepage(US4).html')">Home</a></li>
+            <li><a href="#" onclick="navigateTo('Reservation(US6).html')">Reservation</a></li>
+            <li><a href="#" onclick="navigateTo('Billing(US8).html')">Billing Page</a></li>
+            <li><a href="#" onclick="navigateTo('History(US10).html')">History</a></li>
+            <li><a href="#" onclick="navigateTo('Bookings(US15).html')">Bookings</a></li>
+            <li><a href="#" onclick="navigateTo('Support(US16).html')">Contact Support</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Previous Bookings</h2>
+        <table>
+            <tr>
+                <th>Reservation ID</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Room Number</th>
+                <th>Bill Amount</th>
+                <th>Booking Date</th>
+            </tr>
+            <tr>
+                <td>RES1234</td>
+                <td>2024-02-01</td>
+                <td>2024-02-05</td>
+                <td>101</td>
+                <td>$500</td>
+                <td>2024-01-20</td>
+            </tr>
+            <tr>
+                <td>RES5678</td>
+                <td>2024-03-10</td>
+                <td>2024-03-15</td>
+                <td>202</td>
+                <td>$750</td>
+                <td>2024-02-25</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .payment-form {
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>Card Payment</div>
+        <div id="welcomeMessage">Welcome, <span id="userId">User</span>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Enter Card Details</h2>
+        <form class="payment-form" onsubmit="return processPayment()">
+            <label for="cardNumber">Card Number:</label>
+            <input type="number" id="cardNumber" minlength="16" required>
+            
+            <label for="cardHolder">Card Holder Name:</label>
+            <input type="text" id="cardHolder" minlength="10" required>
+            
+            <label for="expiryDate">Expiry Date (MM/YY):</label>
+            <input type="text" id="expiryDate" pattern="(0[1-9]|1[0-2])\/\d{2}" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="number" id="cvv" minlength="3" required>
+            
+            <button class="btn" type="submit">Make Payment</button>
+        </form>
+    </div>
+    <script>
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+        function processPayment() {
+            let transactionId = "TXN" + Math.floor(100000 + Math.random() * 900000);
+            alert("Payment Successful! Transaction ID: " + transactionId);
+            window.location.href = "Invoice.html";
+            return false;
+        }
+    </script>
+</body>
+</html>

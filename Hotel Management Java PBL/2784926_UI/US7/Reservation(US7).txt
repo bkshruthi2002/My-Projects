@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reservation Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+        .menu-container {
+            background-color: #444;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin: 0 15px;
+        }
+        .menu li a {
+            color: white;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .success-message {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>Admin Dashboard</div>
+        <div id="welcomeMessage">Welcome, Admin</div>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <li><a href="#" onclick="navigateTo('Homepage(US4).html')">Home</a></li>
+            <li><a href="#" onclick="navigateTo('Reservation(US6).html')">Reservation</a></li>
+            <li><a href="#" onclick="navigateTo('Billing(US8).html')">Billing Page</a></li>
+            <li><a href="#" onclick="navigateTo('History(US10).html')">History</a></li>
+            <li><a href="#" onclick="navigateTo('Bookings(US15).html')">Bookings</a></li>
+            <li><a href="#" onclick="navigateTo('Support(US16).html')">Contact Support</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h2>Reservation Approval</h2>
+        <form onsubmit="return processApproval()">
+            <label>Reservation ID:</label>
+            <input type="text" id="reservationId" required>
+            
+            <label>Approval Status:</label>
+            <select id="approvalStatus">
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+            
+            <label>User Check-in:</label>
+            <input type="text" id="userCheckin" required>
+            
+            <label>Room Type:</label>
+            <input type="text" id="roomType" required>
+            
+            <button type="submit" class="btn">Submit</button>
+        </form>
+        <p class="success-message" id="successMessage"></p>
+    </div>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+        function logout() {
+            window.location.href = "Login(US2).html";
+        }
+        function processApproval() {
+            let reservationId = document.getElementById("reservationId").value;
+            let approvalStatus = document.getElementById("approvalStatus").value;
+            let userCheckin = document.getElementById("userCheckin").value;
+            let roomType = document.getElementById("roomType").value;
+            
+            document.getElementById("successMessage").innerText = 
+                `Reservation ${approvalStatus}.\nReservation ID: ${reservationId}\nUser Check-in: ${userCheckin}\nRoom Type: ${roomType}`;
+            document.getElementById("successMessage").style.display = "block";
+            return false; // Prevent actual form submission
+        }
+    </script>
+</body>
+</html>
