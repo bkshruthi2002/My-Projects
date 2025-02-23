@@ -1,0 +1,168 @@
+import java.util.*;
+
+class BookingService {
+    static int bookingIdCounter = 1;
+    int bookingId;
+    String roomType;
+    String bookingDetails;
+    double price;
+
+    public BookingService(String roomType, String bookingDetails, double price) {
+        this.bookingId = bookingIdCounter++;
+        this.roomType = roomType;
+        this.bookingDetails = bookingDetails;
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking ID: " + bookingId + ", Room Type: " + roomType + ", Details: " + bookingDetails + ", Price: " + price;
+    }
+}
+
+public class US11 {
+    static List<BookingService> bookings = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nBooking Services Menu:");
+            System.out.println("1. Add Booking");
+            System.out.println("2. Update Booking");
+            System.out.println("3. Delete Booking");
+            System.out.println("4. View Bookings");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    addBooking();
+                    break;
+                case 2:
+                    updateBooking();
+                    break;
+                case 3:
+                    deleteBooking();
+                    break;
+                case 4:
+                    viewBookings();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void addBooking() {
+        System.out.print("Enter Room Type: ");
+        String roomType = scanner.nextLine();
+        System.out.print("Enter Booking Details: ");
+        String bookingDetails = scanner.nextLine();
+        System.out.print("Enter Price: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine(); // consume newline
+
+        bookings.add(new BookingService(roomType, bookingDetails, price));
+        System.out.println("Successfully registered Booking");
+    }
+
+    public static void updateBooking() {
+        System.out.print("Enter Booking ID to update: ");
+        int bookingId = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        for (BookingService booking : bookings) {
+            if (booking.bookingId == bookingId) {
+                System.out.print("Enter new Room Type: ");
+                booking.roomType = scanner.nextLine();
+                System.out.println("Booking details are updated");
+                return;
+            }
+        }
+        System.out.println("Booking not found!");
+    }
+
+    public static void deleteBooking() {
+        System.out.print("Enter Booking ID to delete: ");
+        int bookingId = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        Iterator<BookingService> iterator = bookings.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().bookingId == bookingId) {
+                iterator.remove();
+                System.out.println("Booking details are deleted");
+                return;
+            }
+        }
+        System.out.println("Booking not found!");
+    }
+
+    public static void viewBookings() {
+        if (bookings.isEmpty()) {
+            System.out.println("No bookings found.");
+        } else {
+            for (BookingService booking : bookings) {
+                System.out.println(booking);
+            }
+        }
+    }
+}
+
+OUTPUT:
+
+Booking Services Menu:
+1. Add Booking
+2. Update Booking
+3. Delete Booking
+4. View Bookings
+5. Exit
+Enter your choice: 1
+Enter Room Type: single
+Enter Booking Details: vacant
+Enter Price: 1200
+Successfully registered Booking
+
+Booking Services Menu:
+1. Add Booking
+2. Update Booking
+3. Delete Booking
+4. View Bookings
+5. Exit
+Enter your choice: 2
+Enter Booking ID to update: 123
+Booking not found!
+
+Booking Services Menu:
+1. Add Booking
+2. Update Booking
+3. Delete Booking
+4. View Bookings
+5. Exit
+Enter your choice: 4
+Booking ID: 1, Room Type: single, Details: vacant, Price: 1200.0
+
+Booking Services Menu:
+1. Add Booking
+2. Update Booking
+3. Delete Booking
+4. View Bookings
+5. Exit
+Enter your choice: 3
+Enter Booking ID to delete: 1
+Booking details are deleted
+
+Booking Services Menu:
+1. Add Booking
+2. Update Booking
+3. Delete Booking
+4. View Bookings
+5. Exit
+Enter your choice: 5
+Exiting...

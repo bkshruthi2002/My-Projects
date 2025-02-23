@@ -1,0 +1,177 @@
+import java.util.*;
+
+class Reservation {
+    static int idCounter = 1;
+    int reservationId;
+    String checkInDate;
+    String checkOutDate;
+    String roomPreference;
+    String name;
+    long contact;
+
+    public Reservation(String checkInDate, String checkOutDate, String roomPreference, String name, long contact) {
+        this.reservationId = idCounter++;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.roomPreference = roomPreference;
+        this.name = name;
+        this.contact = contact;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation ID: " + reservationId + ", Name: " + name + ", Check-in: " + checkInDate + ", Check-out: " + checkOutDate + ", Room: " + roomPreference + ", Contact: " + contact;
+    }
+}
+
+public class US4 {
+    static List<Reservation> reservations = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nReservation Menu:");
+            System.out.println("1. Add Reservation");
+            System.out.println("2. Update Reservation");
+            System.out.println("3. Delete Reservation");
+            System.out.println("4. View Reservations");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    addReservation();
+                    break;
+                case 2:
+                    updateReservation();
+                    break;
+                case 3:
+                    deleteReservation();
+                    break;
+                case 4:
+                    viewReservations();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void addReservation() {
+        System.out.print("Enter Check-in Date: ");
+        String checkInDate = scanner.nextLine();
+        System.out.print("Enter Check-out Date: ");
+        String checkOutDate = scanner.nextLine();
+        System.out.print("Enter Room Preference (Single/Double): ");
+        String roomPreference = scanner.nextLine();
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Contact Number: ");
+        long contact = scanner.nextLong();
+        scanner.nextLine(); // consume newline
+
+        reservations.add(new Reservation(checkInDate, checkOutDate, roomPreference, name, contact));
+        System.out.println("Reservation Successful");
+    }
+
+    public static void updateReservation() {
+        System.out.print("Enter Reservation ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        for (Reservation res : reservations) {
+            if (res.reservationId == id) {
+                System.out.print("Enter new Name: ");
+                res.name = scanner.nextLine();
+                System.out.println("User details are updated successfully");
+                return;
+            }
+        }
+        System.out.println("Reservation not found!");
+    }
+
+    public static void deleteReservation() {
+        System.out.print("Enter Reservation ID to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        Iterator<Reservation> iterator = reservations.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().reservationId == id) {
+                iterator.remove();
+                System.out.println("User details are deleted");
+                return;
+            }
+        }
+        System.out.println("Reservation not found!");
+    }
+
+    public static void viewReservations() {
+        if (reservations.isEmpty()) {
+            System.out.println("No reservations found.");
+        } else {
+            for (Reservation res : reservations) {
+                System.out.println(res);
+            }
+        }
+    }
+}
+OUTPUT:
+
+Reservation Menu:
+1. Add Reservation
+2. Update Reservation
+3. Delete Reservation
+4. View Reservations
+5. Exit
+Enter your choice: 1
+Enter Check-in Date: 15-04-2025
+Enter Check-out Date: 20-04-2025
+Enter Room Preference (Single/Double): Single
+Enter Name: Shruthi
+Enter Contact Number: 83003 427901
+Reservation Successful
+
+Reservation Menu:
+1. Add Reservation
+2. Update Reservation
+3. Delete Reservation
+4. View Reservations
+5. Exit
+Enter your choice: 2
+Enter Reservation ID to update: 12345
+Reservation not found!
+
+Reservation Menu:
+1. Add Reservation
+2. Update Reservation
+3. Delete Reservation
+4. View Reservations
+5. Exit
+Enter your choice: 3
+Enter Reservation ID to delete: 1234
+Reservation not found!
+
+Reservation Menu:
+1. Add Reservation
+2. Update Reservation
+3. Delete Reservation
+4. View Reservations
+5. Exit
+Enter your choice: 4
+Reservation ID: 1, Name: Shruthi, Check-in: 15-04-2025, Check-out: 20-04-2025, Room: Single, Contact: 8300427901
+
+Reservation Menu:
+1. Add Reservation
+2. Update Reservation
+3. Delete Reservation
+4. View Reservations
+5. Exit
+Enter your choice: 5
+Exiting...

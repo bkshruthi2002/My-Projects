@@ -1,0 +1,113 @@
+import java.util.*;
+
+class Complaint {
+    static int idCounter = 1;
+    int complaintId;
+    String userName;
+    long contactNumber;
+    String roomNumber;
+    String complaintType;
+    int feedbackRating;
+
+    public Complaint(String userName, long contactNumber, String roomNumber, String complaintType, int feedbackRating) {
+        this.complaintId = idCounter++;
+        this.userName = userName;
+        this.contactNumber = contactNumber;
+        this.roomNumber = roomNumber;
+        this.complaintType = complaintType;
+        this.feedbackRating = feedbackRating;
+    }
+
+    @Override
+    public String toString() {
+        return "Complaint ID: " + complaintId + ", User: " + userName + ", Contact: " + contactNumber + ", Room: " + roomNumber + ", Type: " + complaintType + ", Rating: " + feedbackRating;
+    }
+}
+
+public class US6 {
+    static List<Complaint> complaints = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nComplaint Menu:");
+            System.out.println("1. Register Complaint");
+            System.out.println("2. View Complaints");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    registerComplaint();
+                    break;
+                case 2:
+                    viewComplaints();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void registerComplaint() {
+        System.out.print("Enter User Name: ");
+        String userName = scanner.nextLine();
+        System.out.print("Enter Contact Number: ");
+        long contactNumber = scanner.nextLong();
+        scanner.nextLine(); // consume newline
+        System.out.print("Enter Room Number: ");
+        String roomNumber = scanner.nextLine();
+        System.out.print("Enter Complaint Type (Poor housekeeping, Noisy guests, etc.): ");
+        String complaintType = scanner.nextLine();
+        System.out.print("Enter Feedback Rating (1-5): ");
+        int feedbackRating = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+
+        complaints.add(new Complaint(userName, contactNumber, roomNumber, complaintType, feedbackRating));
+        System.out.println("Successfully registered Complaint");
+    }
+
+    public static void viewComplaints() {
+        if (complaints.isEmpty()) {
+            System.out.println("No complaints found.");
+        } else {
+            for (Complaint complaint : complaints) {
+                System.out.println(complaint);
+            }
+        }
+    }
+}
+
+OUTPUT:
+
+Complaint Menu:
+1. Register Complaint
+2. View Complaints
+3. Exit
+Enter your choice: 1
+Enter User Name: Shruthi
+Enter Contact Number: 83004278 901
+Enter Room Number: 45
+Enter Complaint Type (Poor housekeeping, Noisy guests, etc.): poor houd sekeeping
+Enter Feedback Rating (1-5): 4
+Successfully registered Complaint
+
+Complaint Menu:
+1. Register Complaint
+2. View Complaints
+3. Exit
+Enter your choice: 2
+Complaint ID: 1, User: Shruthi, Contact: 8300427901, Room: 45, Type: poor housekeeping, Rating: 4
+
+Complaint Menu:
+1. Register Complaint
+2. View Complaints
+3. Exit
+Enter your choice: 3
+Exiting...

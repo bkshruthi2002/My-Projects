@@ -1,0 +1,77 @@
+import java.util.*;
+
+class BookingRecord {
+    String customerId;
+    String customerName;
+    String mobileNumber;
+    String email;
+
+    public BookingRecord(String customerId, String customerName, String mobileNumber, String email) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.mobileNumber = mobileNumber;
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer ID: " + customerId + ", Name: " + customerName + ", Mobile: " + mobileNumber + ", Email: " + email;
+    }
+}
+
+public class US13 {
+    static List<BookingRecord> bookingHistory = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample data
+        bookingHistory.add(new BookingRecord("C101", "John Doe", "9876543210", "john@example.com"));
+        bookingHistory.add(new BookingRecord("C102", "Jane Smith", "8765432109", "jane@example.com"));
+
+        while (true) {
+            System.out.println("\nBooking History Menu:");
+            System.out.println("1. View Booking History");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    viewBookingHistory();
+                    break;
+                case 2:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewBookingHistory() {
+        if (bookingHistory.isEmpty()) {
+            System.out.println("No booking records found.");
+        } else {
+            for (BookingRecord record : bookingHistory) {
+                System.out.println(record);
+            }
+        }
+    }
+}
+
+OUTPUT:
+
+Booking History Menu:
+1. View Booking History
+2. Exit
+Enter your choice: 1
+Customer ID: C101, Name: John Doe, Mobile: 9876543210, Email: john@example.com
+Customer ID: C102, Name: Jane Smith, Mobile: 8765432109, Email: jane@example.com
+
+Booking History Menu:
+1. View Booking History
+2. Exit
+Enter your choice: 2
+Exiting...

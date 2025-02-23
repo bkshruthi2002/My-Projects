@@ -1,0 +1,81 @@
+import java.util.*;
+
+class Complaint {
+    int complaintId;
+    String userName;
+    long contactNumber;
+    String roomNumber;
+    String complaintType;
+    int feedbackRating;
+
+    public Complaint(int complaintId, String userName, long contactNumber, String roomNumber, String complaintType, int feedbackRating) {
+        this.complaintId = complaintId;
+        this.userName = userName;
+        this.contactNumber = contactNumber;
+        this.roomNumber = roomNumber;
+        this.complaintType = complaintType;
+        this.feedbackRating = feedbackRating;
+    }
+
+    @Override
+    public String toString() {
+        return "Complaint ID: " + complaintId + ", User: " + userName + ", Contact: " + contactNumber + ", Room: " + roomNumber + ", Type: " + complaintType + ", Rating: " + feedbackRating;
+    }
+}
+
+public class US12 {
+    static List<Complaint> complaints = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample complaints
+        complaints.add(new Complaint(1, "John Doe", 9876543210L, "101", "Poor housekeeping", 3));
+        complaints.add(new Complaint(2, "Jane Smith", 8765432109L, "202", "Noisy guests", 2));
+
+        while (true) {
+            System.out.println("\nActive Complaints Menu:");
+            System.out.println("1. View Active Complaints");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    viewComplaints();
+                    break;
+                case 2:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewComplaints() {
+        if (complaints.isEmpty()) {
+            System.out.println("No active complaints found.");
+        } else {
+            for (Complaint complaint : complaints) {
+                System.out.println(complaint);
+            }
+        }
+    }
+}
+
+OUTPUT:
+
+Active Complaints Menu:
+1. View Active Complaints
+2. Exit
+Enter your choice: 1
+Complaint ID: 1, User: John Doe, Contact: 9876543210, Room: 101, Type: Poor housekeeping, Rating: 3
+Complaint ID: 2, User: Jane Smith, Contact: 8765432109, Room: 202, Type: Noisy guests, Rating: 2
+
+Active Complaints Menu:
+1. View Active Complaints
+2. Exit
+Enter your choice: 2
+Exiting...

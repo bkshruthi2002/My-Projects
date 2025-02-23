@@ -1,0 +1,93 @@
+import java.util.*;
+
+class BookingDetail {
+    String userId;
+    int reservationId;
+    String checkInDate;
+    String checkOutDate;
+    String roomNumber;
+
+    public BookingDetail(String userId, int reservationId, String checkInDate, String checkOutDate, String roomNumber) {
+        this.userId = userId;
+        this.reservationId = reservationId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.roomNumber = roomNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "User ID: " + userId + ", Reservation ID: " + reservationId + ", Check-in: " + checkInDate + ", Check-out: " + checkOutDate + ", Room: " + roomNumber;
+    }
+}
+
+public class US14 {
+    static List<BookingDetail> bookingRecords = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample data
+        bookingRecords.add(new BookingDetail("U001", 101, "2025-02-01", "2025-02-05", "A101"));
+        bookingRecords.add(new BookingDetail("U002", 102, "2025-03-10", "2025-03-15", "B202"));
+
+        while (true) {
+            System.out.println("\nBooking History by User ID Menu:");
+            System.out.println("1. View Booking History by User ID");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    viewBookingHistoryByUserId();
+                    break;
+                case 2:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewBookingHistoryByUserId() {
+        System.out.print("Enter User ID: ");
+        String userId = scanner.nextLine();
+        boolean found = false;
+
+        for (BookingDetail record : bookingRecords) {
+            if (record.userId.equalsIgnoreCase(userId)) {
+                System.out.println(record);
+                found = true;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("No booking history found for User ID: " + userId);
+        }
+    }
+}
+
+OUTPUT:
+
+Booking History by User ID Menu:
+1. View Booking History by User ID
+2. Exit
+Enter your choice: 1
+Enter User ID: U001
+User ID: U001, Reservation ID: 101, Check-in: 2025-02-01, Check-out: 2025-02-05, Room: A101
+
+Booking History by User ID Menu:
+1. View Booking History by User ID
+2. Exit
+Enter your choice: 1
+Enter User ID: U002
+User ID: U002, Reservation ID: 102, Check-in: 2025-03-10, Check-out: 2025-03-15, Room: B202
+
+Booking History by User ID Menu:
+1. View Booking History by User ID
+2. Exit
+Enter your choice: 2
+Exiting...

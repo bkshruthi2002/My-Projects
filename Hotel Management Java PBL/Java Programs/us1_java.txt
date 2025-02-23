@@ -1,0 +1,166 @@
+import java.util.*;
+
+class UserProfile {
+    String userID;
+    String fullName;
+    String email;
+    String mobileNumber;
+    String password;
+
+    public UserProfile(String userID, String fullName, String email, String mobileNumber, String password) {
+        this.userID = userID;
+        this.fullName = fullName;
+        this.email = email;
+        this.mobileNumber = mobileNumber;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserID: " + userID + ", FullName: " + fullName + ", Email: " + email + ", MobileNumber: " + mobileNumber;
+    }
+}
+
+public class UserManagement {
+    static List<UserProfile> users = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Register new user");
+            System.out.println("2. Update user details");
+            System.out.println("3. Delete user");
+            System.out.println("4. View all users");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            if (choice == 1) {
+                registerUser();
+            } else if (choice == 2) {
+                updateUser();
+            } else if (choice == 3) {
+                deleteUser();
+            } else if (choice == 4) {
+                viewUsers();
+            } else if (choice == 5) {
+                System.out.println("Exiting...");
+                return;
+            } else {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void registerUser() {
+        System.out.print("Enter User ID: ");
+        String userID = scanner.nextLine();
+        System.out.print("Enter Full Name (Max 50 chars): ");
+        String fullName = scanner.nextLine();
+        System.out.print("Enter Email (Max 100 chars): ");
+        String email = scanner.nextLine();
+        System.out.print("Enter Mobile Number: ");
+        String mobileNumber = scanner.nextLine();
+        System.out.print("Enter Password (Max 30 chars): ");
+        String password = scanner.nextLine();
+        
+        users.add(new UserProfile(userID, fullName, email, mobileNumber, password));
+        System.out.println("User Registration is successful");
+    }
+
+    public static void updateUser() {
+        System.out.print("Enter User ID to update: ");
+        String userID = scanner.nextLine();
+        
+        for (UserProfile user : users) {
+            if (user.userID.equals(userID)) {
+                System.out.print("Enter new Email: ");
+                user.email = scanner.nextLine();
+                System.out.println("User details are updated successfully");
+                return;
+            }
+        }
+        System.out.println("User not found!");
+    }
+
+    public static void deleteUser() {
+        System.out.print("Enter User ID to delete: ");
+        String userID = scanner.nextLine();
+        
+        Iterator<UserProfile> iterator = users.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().userID.equals(userID)) {
+                iterator.remove();
+                System.out.println("User details are deleted");
+                return;
+            }
+        }
+        System.out.println("User not found!");
+    }
+
+    public static void viewUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users registered.");
+        } else {
+            for (UserProfile user : users) {
+                System.out.println(user);
+            }
+        }
+    }
+}
+OUTPUT:
+Menu:
+1. Register new user
+2. Update user details
+3. Delete user
+4. View all users
+5. Exit
+Enter your choice:1
+Enter User ID:1234
+Enter Full Name(Max 50 chars):Shruthi
+Enter Email(Max 100 chars):bkshruthi2003@gmail.com
+Enter Mobile Number:8300427901
+Enter Password(Max 30 chars):Shruthi@123
+User Registration is successful
+
+Menu:
+1. Register new user
+2. Update user details
+3. Delete user
+4. View all users
+5. Exit
+Enter your choice:2
+Enter User ID to update:1235
+Enter new Email:bkshruthi2002@gmail.com
+User details are updated successfully
+
+Menu:
+1. Register new user
+2. Update user details
+3. Delete user
+4. View all users
+5. Exit
+Enter your choice:3
+Enter User ID to delete:1234
+User details are deleted
+
+Menu:
+1. Register new user
+2. Update user details
+3. Delete user
+4. View all users
+5. Exit
+Enter your choice:4
+No users registered.
+
+Menu:
+1. Register new user
+2. Update user details
+3. Delete user
+4. View all users
+5. Exit
+Enter your choice:5
+Exiting...

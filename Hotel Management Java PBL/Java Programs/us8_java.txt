@@ -1,0 +1,106 @@
+import java.util.*;
+
+class Room {
+    String roomType;
+    boolean isAvailable;
+    double price;
+    String location;
+
+    public Room(String roomType, boolean isAvailable, double price, String location) {
+        this.roomType = roomType;
+        this.isAvailable = isAvailable;
+        this.price = price;
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Room Type: " + roomType + ", Available: " + (isAvailable ? "Yes" : "No") + ", Price: " + price + ", Location: " + location;
+    }
+}
+
+public class US8 {
+    static List<Room> rooms = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample data
+        rooms.add(new Room("1BHK", true, 1000.0, "Downtown"));
+        rooms.add(new Room("2BHK", false, 2000.0, "Uptown"));
+        rooms.add(new Room("3BHK", true, 3000.0, "Suburb"));
+
+        while (true) {
+            System.out.println("\nRoom Status Menu:");
+            System.out.println("1. View Room Availability");
+            System.out.println("2. Update Room Status (Admin Only)");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    viewRoomAvailability();
+                    break;
+                case 2:
+                    updateRoomStatus();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewRoomAvailability() {
+        for (Room room : rooms) {
+            System.out.println(room);
+        }
+    }
+
+    public static void updateRoomStatus() {
+        System.out.print("Enter Room Type to update (1BHK/2BHK/3BHK): ");
+        String roomType = scanner.nextLine();
+        
+        for (Room room : rooms) {
+            if (room.roomType.equalsIgnoreCase(roomType)) {
+                System.out.print("Enter new availability status (true for available, false for occupied): ");
+                room.isAvailable = scanner.nextBoolean();
+                scanner.nextLine(); // consume newline
+                System.out.println("Room status updated successfully.");
+                return;
+            }
+        }
+        System.out.println("Room not found!");
+    }
+}
+
+OUTPUT:
+
+Room Status Menu:
+1. View Room Availability
+2. Update Room Status (Admin Only)
+3. Exit
+Enter your choice: 1
+Room Type: 1BHK, Available: Yes, Price: 1000.0, Location: Downtown
+Room Type: 2BHK, Available: No, Price: 2000.0, Location: Uptown
+Room Type: 3BHK, Available: Yes, Price: 3000.0, Location: Suburb
+
+Room Status Menu:
+1. View Room Availability
+2. Update Room Status (Admin Only)
+3. Exit
+Enter your choice: 2
+Enter Room Type to update (1BHK/2BHK/3BHK): 1BHK
+Enter new availability status (true for available, false for occupied): false
+Room status updated successfully.
+
+Room Status Menu:
+1. View Room Availability
+2. Update Room Status (Admin Only)
+3. Exit
+Enter your choice: 3
+Exiting...

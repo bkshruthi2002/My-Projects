@@ -1,0 +1,116 @@
+import java.util.*;
+
+class Bill {
+    int reservationId;
+    String userName;
+    double roomCharges;
+    double additionalCharges;
+    double totalAmount;
+
+    public Bill(int reservationId, String userName, double roomCharges, double additionalCharges) {
+        this.reservationId = reservationId;
+        this.userName = userName;
+        this.roomCharges = roomCharges;
+        this.additionalCharges = additionalCharges;
+        this.totalAmount = roomCharges + additionalCharges;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation ID: " + reservationId + ", User: " + userName + ", Room Charges: " + roomCharges + ", Additional Charges: " + additionalCharges + ", Total Amount: " + totalAmount;
+    }
+}
+
+public class US9 {
+    static List<Bill> bills = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample data
+        bills.add(new Bill(101, "John Doe", 5000.0, 1000.0));
+        bills.add(new Bill(102, "Jane Smith", 7000.0, 500.0));
+
+        while (true) {
+            System.out.println("\nCheckout Billing Menu:");
+            System.out.println("1. View Bill");
+            System.out.println("2. Pay Bill");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    viewBill();
+                    break;
+                case 2:
+                    payBill();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewBill() {
+        System.out.print("Enter Reservation ID: ");
+        int reservationId = scanner.nextInt();
+        scanner.nextLine();
+        
+        for (Bill bill : bills) {
+            if (bill.reservationId == reservationId) {
+                System.out.println(bill);
+                return;
+            }
+        }
+        System.out.println("Bill not found!");
+    }
+
+    public static void payBill() {
+        System.out.print("Enter Reservation ID to pay bill: ");
+        int reservationId = scanner.nextInt();
+        scanner.nextLine();
+        
+        Iterator<Bill> iterator = bills.iterator();
+        while (iterator.hasNext()) {
+            Bill bill = iterator.next();
+            if (bill.reservationId == reservationId) {
+                System.out.println("Total Amount: " + bill.totalAmount);
+                System.out.println("Payment Successful. Invoice generated.");
+                iterator.remove();
+                return;
+            }
+        }
+        System.out.println("Bill not found!");
+    }
+}
+
+OUTPUT:
+
+Checkout Billing Menu:
+1. View Bill
+2. Pay Bill
+3. Exit
+Enter your choice: 1
+Enter Reservation ID: 101
+Reservation ID: 101, User: John Doe, Room Charges: 5000.0, Additional Charges: 1000.0, Total Amount: 6000.0
+
+Checkout Billing Menu:
+1. View Bill
+2. Pay Bill
+3. Exit
+Enter your choice: 2
+Enter Reservation ID to pay bill: 102
+Total Amount: 7500.0
+Payment Successful. Invoice generated.
+
+Checkout Billing Menu:
+1. View Bill
+2. Pay Bill
+3. Exit
+Enter your choice: 3
+Exiting...

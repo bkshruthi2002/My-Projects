@@ -1,0 +1,99 @@
+import java.util.*;
+
+class UserProfile {
+    String userID;
+    String password;
+
+    public UserProfile(String userID, String password) {
+        this.userID = userID;
+        this.password = password;
+    }
+}
+
+public class US3 {
+    static List<UserProfile> users = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample admin and user for testing
+        users.add(new UserProfile("Admin", "admin123"));
+        users.add(new UserProfile("User1", "user123"));
+
+        while (true) {
+            System.out.println("\nLogin Menu:");
+            System.out.print("Enter User ID: ");
+            String userID = scanner.nextLine();
+            System.out.print("Enter Password: ");
+            String password = scanner.nextLine();
+            
+            boolean isAuthenticated = false;
+            boolean isAdmin = false;
+            
+            for (UserProfile user : users) {
+                if (user.userID.equals(userID) && user.password.equals(password)) {
+                    isAuthenticated = true;
+                    isAdmin = userID.equals("Admin");
+                    break;
+                }
+            }
+
+            if (isAuthenticated) {
+                if (isAdmin) {
+                    displayAdminMenu();
+                } else {
+                    displayCustomerMenu();
+                }
+            } else {
+                System.out.println("Invalid User ID or Password. Try again.");
+            }
+        }
+    }
+
+    public static void displayCustomerMenu() {
+        System.out.println("\nCustomer Menu:");
+        System.out.println("1. Reservation");
+        System.out.println("2. Booking History");
+        System.out.println("3. Room Status");
+        System.out.println("4. Check-out Billing");
+        System.out.println("5. Complaint");
+        System.out.println("6. Contact Support");
+    }
+
+    public static void displayAdminMenu() {
+        System.out.println("\nAdmin Menu:");
+        System.out.println("1. Booking Hotel Services");
+        System.out.println("2. Booking History");
+        System.out.println("3. Booking History by ID");
+        System.out.println("4. Room Status");
+        System.out.println("5. Check-out Billing Invoice");
+        System.out.println("6. View Complaints");
+    }
+}
+OUTPUT:
+Login Menu:
+Enter User ID: User1
+Enter Password: user123
+
+Customer Menu:
+1. Reservation
+2. Booking History
+3. Room Status
+4. Check-out Billing
+5. Complaint
+6. Contact Support
+
+Login Menu:
+Enter User ID: Admin
+Enter Password: admin123
+
+Admin Menu:
+1. Booking Hotel Services
+2. Booking History
+3. Booking History by ID
+4. Room Status
+5. Check-out Billing Invoice
+6. View Complaints
+
+Login Menu:
+Enter User ID: 
+Enter Password:

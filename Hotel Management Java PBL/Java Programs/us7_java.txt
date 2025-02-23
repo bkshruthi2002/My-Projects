@@ -1,0 +1,19 @@
+public class US7 {
+    public static void main(String[] args) {
+        displayContactSupport();
+    }
+
+    public static void displayContactSupport() {
+        System.out.println("\nCustomer Support Details:");
+        System.out.println("Contact Number: +1-800-123-4567");
+        System.out.println("Email: support@hotelservices.com");
+        System.out.println("Address: 123 Main Street, City, Country");
+    }
+}
+
+OUTPUT:
+
+Customer Support Details:
+Contact Number: +1-800-123-4567
+Email: support@hotelservices.com
+Address: 123 Main Street, City, Country

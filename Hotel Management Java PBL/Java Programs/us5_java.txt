@@ -1,0 +1,77 @@
+import java.util.*;
+
+class Booking {
+    int reservationId;
+    String checkInDate;
+    String checkOutDate;
+    String roomNumber;
+    double billAmount;
+
+    public Booking(int reservationId, String checkInDate, String checkOutDate, String roomNumber, double billAmount) {
+        this.reservationId = reservationId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.roomNumber = roomNumber;
+        this.billAmount = billAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation ID: " + reservationId + ", Check-in: " + checkInDate + ", Check-out: " + checkOutDate + ", Room: " + roomNumber + ", Bill: " + billAmount;
+    }
+}
+
+public class US5 {
+    static List<Booking> bookingHistory = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        // Sample data for testing
+        bookingHistory.add(new Booking(101, "2025-02-01", "2025-02-05", "A101", 5000.00));
+        bookingHistory.add(new Booking(102, "2025-02-10", "2025-02-15", "B202", 7000.00));
+
+        while (true) {
+            System.out.println("\nBooking History Menu:");
+            System.out.println("1. View Booking History");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            if (choice == 1) {
+                viewBookingHistory();
+            } else if (choice == 2) {
+                System.out.println("Exiting...");
+                return;
+            } else {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void viewBookingHistory() {
+        if (bookingHistory.isEmpty()) {
+            System.out.println("No previous bookings found.");
+        } else {
+            for (Booking booking : bookingHistory) {
+                System.out.println(booking);
+            }
+        }
+    }
+}
+OUTPUT:
+
+
+Booking History Menu:
+1. View Booking History
+2. Exit
+Enter your choice: 1
+Reservation ID: 101, Check-in: 2025-02-01, Check-out: 2025-02-05, Room: A101, Bill: 5000.0
+Reservation ID: 102, Check-in: 2025-02-10, Check-out: 2025-02-15, Room: B202, Bill: 7000.0
+
+Booking History Menu:
+1. View Booking History
+2. Exit
+Enter your choice: 2
+Exiting...

@@ -1,0 +1,85 @@
+import java.util.*;
+
+class Payment {
+    String cardHolderName;
+    String cardNumber;
+    int cvv;
+    String expiryDate;
+    double amount;
+
+    public Payment(String cardHolderName, String cardNumber, int cvv, String expiryDate, double amount) {
+        this.cardHolderName = cardHolderName;
+        this.cardNumber = cardNumber;
+        this.cvv = cvv;
+        this.expiryDate = expiryDate;
+        this.amount = amount;
+    }
+
+    public void processPayment() {
+        System.out.println("Payment of " + amount + " successful. Invoice generated.");
+    }
+}
+
+public class US10 {
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\nBill Payment Menu:");
+            System.out.println("1. Make Payment");
+            System.out.println("2. Exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    makePayment();
+                    break;
+                case 2:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+
+    public static void makePayment() {
+        System.out.print("Enter Card Holder Name: ");
+        String cardHolderName = scanner.nextLine();
+        System.out.print("Enter Card Number: ");
+        String cardNumber = scanner.nextLine();
+        System.out.print("Enter CVV: ");
+        int cvv = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        System.out.print("Enter Expiry Date (MM/YY): ");
+        String expiryDate = scanner.nextLine();
+        System.out.print("Enter Amount: ");
+        double amount = scanner.nextDouble();
+        scanner.nextLine(); // consume newline
+
+        Payment payment = new Payment(cardHolderName, cardNumber, cvv, expiryDate, amount);
+        payment.processPayment();
+    }
+}
+
+OUTPUT:
+
+Bill Payment Menu:
+1. Make Payment
+2. Exit
+Enter your choice: 1
+Enter Card Holder Name: shruthi
+Enter Card Number: 1234567890
+Enter CVV: 123
+Enter Expiry Date (MM/YY):09/25
+Enter Amount: 1200
+Payment of 1200.0 successful. Invoice generated.
+
+Bill Payment Menu:
+1. Make Payment
+2. Exit
+Enter your choice: 2
+Exiting...
