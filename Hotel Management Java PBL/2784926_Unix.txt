@@ -1,0 +1,81 @@
+US01:
+roomstatus.txt
+UserID | UserName | RoomType | Status | Price range | Date
+1 | Alice | Single | Available | Rs.1000 | 01-03-2025
+2 | Bob | Double | Occupied | Rs.2000 | 02-03-2025
+3 | Charlie | Suite | Available | Rs.3000 | 03-03-2025
+
+touch roomstatus.txt
+grep '|Available|' roomstatus.txt | awk -F '|' '{print $3, $6}'
+
+OUTPUT:
+Single 01-03-2025
+Suite 03-03-2025
+
+US02:
+Reservation.txt
+Booking ID | Guest name | Status | Roomtype
+101 | Alice | Approved | Single
+102 | Bob | Pending | Double
+103 | Charlie | Approved | Suite
+
+touch Reservation.txt
+grep '|Approved|' Reservation.txt | wc -l
+
+OUTPUT:
+2
+
+US03:
+Bookings.txt
+Booking ID | Guest name | Contact details | Checkin/Check out dates | Upcoming bookings date
+201 | Alice | 1234567890 | 01-03-2025 / 05-03-2025| 10-03-2025
+202 | Bob | 0987654321 | 02-03-2025 / 06-03-2025 | 15-03-2025
+203 | Charlie | 1122334455 | 03-03-2025 / 07-03-2025 | 20-03-2025
+ 
+touch Bookings.txt
+grep -v '^#' Bookings.txt | awk -F '|' '{print $1, $2, $5}' | sort -k3r
+
+OUTPUT:
+Booking ID   Guest name   Upcoming bookings date
+203   Charlie   20-03-2025
+202   Bob   15-03-2025
+201   Alice   10-03-2025
+
+US04:
+Reservation.txt
+Booking ID, Guest name, Contact details, Checkin date, Check out date
+301, Sharan, 9876543210, 01-03-2025, 05-03-2025
+302, Alice, 8765432109, 06-03-2025, 10-03-2025
+
+touch Reservation.txt
+grep -i "Sharan" Reservation.txt || echo "No details found"
+
+OUTPUT:
+301, Sharan, 9876543210, 01-03-2025, 05-03-2025
+
+US05:
+Complaints.txt
+GuestId|GuestName|ComplaintType|Category|RoomNo|Phone|StatusOfComplaint
+201|Sharan|Service|Cleaning|305|9876543210|Active
+202|Ravi|Room|AC Issue|308|9876541230|Resolved
+203|Meera|Service|Food|310|9876509876|Active
+  
+touch Complaints.txt
+grep -c "Active" Complaints.txt
+
+OUTPUT:
+2
+
+US06:
+bill.txt
+GuestId|GuestName|Phone Number|RoomNo|Date|Bill Amount|Mode of Payment
+301|Sharan|9876543210|305|14-02-2025 - 16-02-2025|5000|Credit Card
+302|Ravi|9876541230|308|15-02-2025 - 17-02-2025|6000|Cash
+303|Meera|9876509876|310|13-02-2025 - 15-02-2025|5500|UPI
+
+touch bill.txt
+grep -oE '[0-9]+$' bill.txt | 
+awk '{sum+=$1; count++} END {if (count>0) print sum/count; else print "No data available"}'
+
+OUTPUT:
+5500

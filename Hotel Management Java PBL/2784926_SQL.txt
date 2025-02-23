@@ -1,0 +1,91 @@
+-- User Story US001: Create UserProfile Table and Insert Data
+CREATE TABLE UserProfile (
+    UserID INTEGER PRIMARY KEY,
+    FullName VARCHAR2(30),
+    Email VARCHAR2(50),
+    MobileNumber VARCHAR2(15),
+    Password VARCHAR2(30)
+);
+
+INSERT INTO UserProfile (UserID, FullName, Email, MobileNumber, Password) VALUES 
+(1, 'Amir', 'amir@gmail.com', '9876543210', 'password1'),
+(2, 'Priya', 'priya@gmail.com', '8765432109', 'password2'),
+(3, 'Rahul', 'rahul@gmail.com', '7654321098', 'password3'),
+(4, 'Neha', 'neha@gmail.com', '6543210987', 'password4'),
+(5, 'Suresh', 'suresh@gmail.com', '5432109876', 'password5');
+
+-- User Story US002: Create Reservations Table
+CREATE TABLE Reservations (
+    Reservation_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    User_ID INTEGER REFERENCES UserProfile(UserID),
+    Check_In_Date DATE,
+    Check_Out_Date DATE,
+    Room_Number INTEGER,
+    Status VARCHAR2(10)
+);
+
+-- User Story US003: Insert Data into Reservations Table
+INSERT INTO Reservations (User_ID, Check_In_Date, Check_Out_Date, Room_Number, Status) VALUES 
+(1, TO_DATE('20-02-2025', 'DD-MM-YYYY'), TO_DATE('25-02-2025', 'DD-MM-YYYY'), 101, 'approved'),
+(2, TO_DATE('01-03-2025', 'DD-MM-YYYY'), TO_DATE('05-03-2025', 'DD-MM-YYYY'), 102, 'approved'),
+(2, TO_DATE('01-03-2025', 'DD-MM-YYYY'), TO_DATE('05-03-2025', 'DD-MM-YYYY'), 102, 'approved'),
+(3, TO_DATE('10-03-2025', 'DD-MM-YYYY'), TO_DATE('15-03-2025', 'DD-MM-YYYY'), 103, 'canceled'),
+(4, TO_DATE('20-03-2025', 'DD-MM-YYYY'), TO_DATE('25-03-2025', 'DD-MM-YYYY'), 104, 'approved'),
+(5, TO_DATE('30-03-2025', 'DD-MM-YYYY'), TO_DATE('05-04-2025', 'DD-MM-YYYY'), 105, 'approved');
+
+-- User Story US004: Create Bills Table
+CREATE TABLE Bills (
+    Bill_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Reservation_ID INTEGER REFERENCES Reservations(Reservation_ID),
+    Total_Amount NUMBER(10,2),
+    Additional_Charges NUMBER(10,2),
+    Payment_Status VARCHAR2(20)
+);
+
+-- User Story US005: Insert Data into Bills Table
+INSERT INTO Bills (Reservation_ID, Total_Amount, Additional_Charges, Payment_Status) VALUES 
+(1, 5000.00, 200.00, 'Paid'),
+(2, 7000.00, 150.00, 'Pending'),
+(3, 4500.00, 100.00, 'Pending'),
+(4, 8000.00, 250.00, 'Paid'),
+(5, 6500.00, 300.00, 'Paid');
+
+-- User Story US006: Retrieve Reservation Information
+SELECT * FROM Reservations WHERE Check_In_Date >= SYSDATE - 10;
+DELETE FROM Reservations WHERE Status = 'canceled';
+SELECT * FROM Reservations WHERE Status = 'approved';
+
+-- User Story US007: Retrieve User Details Ending with 'a'
+SELECT * FROM UserProfile WHERE FullName LIKE '%a' ORDER BY FullName DESC;
+
+-- User Story US008: Create RoomStatus Table and Insert Data
+CREATE TABLE RoomStatus (
+    Customer_ID NUMBER(13) PRIMARY KEY,
+    Customer_Name VARCHAR2(50),
+    Status VARCHAR2(10),
+    Date_Availability DATE,
+    Room_Price NUMBER(10,2)
+);
+
+INSERT INTO RoomStatus (Customer_ID, Customer_Name, Status, Date_Availability, Room_Price) VALUES 
+(1000000000001, 'Amit Sharma', 'Vacant', TO_DATE('20-02-2025', 'DD-MM-YYYY'), 3000.00),
+(1000000000002, 'Priya Singh', 'Occupied', TO_DATE('01-03-2025', 'DD-MM-YYYY'), 4000.00),
+(1000000000003, 'Rahul Verma', 'Vacant', TO_DATE('10-03-2025', 'DD-MM-YYYY'), 2500.00),
+(1000000000004, 'Neha Gupta', 'Occupied', TO_DATE('20-03-2025', 'DD-MM-YYYY'), 5000.00),
+(1000000000005, 'Suresh Reddy', 'Vacant', TO_DATE('30-03-2025', 'DD-MM-YYYY'), 3500.00);
+
+-- User Story US009: Create Complaint Table
+CREATE TABLE Complaints (
+    Customer_ID INTEGER,
+    Contact_Number VARCHAR2(15),
+    Room_Number INTEGER,
+    Complaint_Type VARCHAR2(50),
+    Feedback VARCHAR2(10)
+);
+
+-- User Story US010: Alter Reservation Table to Add Upcoming Bookings Date
+ALTER TABLE Reservations ADD (Upcoming_Bookings_Date DATE);
+
+-- User Story US011: Update Payment Status and Display Details
+UPDATE Bills SET Payment_Status = 'Paid' WHERE Bill_ID = 2;
+SELECT * FROM Bills WHERE Bill_ID = 2;
